@@ -59,7 +59,7 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
                 <article 
                     className={`
                         max-w-2xl mx-auto prose prose-neutral
-                        [&_ol]:ml-5 [&_ul]:ml-5 []
+                        [&_ol]:ml-5 [&_ul]:ml-5
                     `}>
                     <Markdown
                         remarkPlugins={[remarkGfm]}>
