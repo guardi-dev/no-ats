@@ -1,40 +1,10 @@
 import Link from 'next/link';
-
-// Эмуляция данных. В реальности это будет загружаться из MD/JSON файлов при сборке (getStaticProps/ISR)
-const featuredJobs = [
-  {
-    id: '1',
-    company: 'Guardi Tech',
-    role: 'Senior Rust Engineer (Distributed Systems)',
-    salary: '$140k - $180k',
-    location: 'Remote (GMT+3)',
-    added: '2026-04-15',
-    slug: 'guardi-tech-senior-rust',
-  },
-  {
-    id: '2',
-    company: 'Aether Flow',
-    role: 'CTO / Co-Founder',
-    salary: '$100k - $130k + 5% Equity',
-    location: 'Berlin / Hybrid',
-    added: '2026-04-12',
-    slug: 'aether-flow-cto',
-  },
-  {
-    id: '3',
-    company: 'NonProfit AI Research',
-    role: 'Research Scientist (Neuromorphic Computing)',
-    salary: '$90k - $120k',
-    location: 'Remote',
-    added: '2026-04-10',
-    slug: 'nonprofit-ai-researcher',
-  },
-];
-
-const totalJobs = 42;
-const bannedCompaniesCount = 7;
+import { getJobListMeta } from './utils/getJobs';
 
 export default function NoATSPage() {
+
+  const jobs = getJobListMeta();
+
   return (
     <>
       {/* Intro */}
@@ -61,7 +31,7 @@ export default function NoATSPage() {
         </div>
 
         <div className="space-y-1">
-          {featuredJobs.map((job, index) => (
+          {jobs.map((job, index) => (
             <div
               key={job.id}
               className={`flex items-start gap-4 p-2 rounded-sm ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'} hover:bg-brand/5 border border-transparent hover:border-brand/10`}
@@ -72,8 +42,8 @@ export default function NoATSPage() {
               {/* Main Info */}
               <div className="flex-grow grid grid-cols-1 md:grid-cols-[1fr,auto,auto] gap-x-6 gap-y-1 items-baseline">
                 <div>
-                  <Link href={`/jobs/${job.slug}`} className="font-medium text-[#000000] hover:underline decoration-brand">
-                    {job.role}
+                  <Link href={`/jobs/${job.id}`} className="font-medium text-[#000000] hover:underline decoration-brand">
+                    {job.position}
                   </Link>
                   <span className="text-neutral-600 text-sm ml-2">at {job.company}</span>
                 </div>
@@ -84,7 +54,7 @@ export default function NoATSPage() {
                 </div>
 
                 <div className="text-xs text-neutral-500 md:text-right whitespace-nowrap">
-                  {job.location} • {job.added}
+                  {job.location} • {job.date}
                 </div>
               </div>
 
