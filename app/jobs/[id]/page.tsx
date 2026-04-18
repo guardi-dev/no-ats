@@ -1,6 +1,8 @@
 import { links } from '@/app/components/links';
 import { getJobById } from '@/app/utils/getJobs';
 import Link from 'next/link';
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm'
 
 export default async function JobDetailPage(props: { params: Promise<{ id: string }> }) {
     const { id } = await props.params;
@@ -45,8 +47,11 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
                 </div>
 
                 {/* Description */}
-                <article className="prose prose-neutral max-w-none prose-h3:text-lg prose-h3:font-bold prose-h3:mt-8 prose-li:my-1">
-                    <div dangerouslySetInnerHTML={{ __html: jobData.description }} />
+                <article className="max-w-2xl mx-auto prose prose-neutral">
+                    <Markdown 
+                        remarkPlugins={[remarkGfm]}>
+                        {jobData.description}
+                    </Markdown>
                 </article>
 
                 {/* Actions */}
