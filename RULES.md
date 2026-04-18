@@ -20,7 +20,7 @@ To list a vacancy on No-ATS, companies must strictly adhere to the following rul
 ### 5. Enforcement (The Blacklist)
 - Any candidate can open an **Issue** to report a violation.
 - Evidence (emails/screenshots) will be reviewed by the community/maintainers.
-- A banned company is added to `blacklist.csv` and its vacancies are deleted. **A ban is permanent.**
+- A banned company is added to `BLACKLIST.md` and its vacancies are deleted. **A ban is permanent.**
 
 ---
 *By submitting a Pull Request to this repository, you agree to these rules and accept the public consequences of violating them.*
