@@ -14,12 +14,13 @@ We don't have a dashboard. We use Pull Requests.
 
 ### Vacancy Template
 ```markdown
-Position Title
-Company Name
-Salary Range e.g. "$100k - $150k"
-Location e.g. "Remote / City, Country"
-Apply Email e.g. "hiring@company.com"
-Tech Stack e.g. "Rust", "PostgreSQL", "etc"
+Position Title e.g. Senior ML Engineer
+Company Name e.g. Guardi Dev
+Salary Range e.g. $100k - $150k
+Location e.g. Remote / City, Country
+Posting Date in DD-MM-YYYY e.g. 18-04-2026
+Apply Email e.g. hiring@company.com
+Tech Stack e.g. Rust, PostgreSQL, etc
 
 ===DESCRIPTION===
 ### About the Role
