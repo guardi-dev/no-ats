@@ -6,8 +6,6 @@ export default function NoATSPage() {
 
   const jobs = getJobListMeta();
 
-  console.log(jobs)
-
   return (
     <>
       {/* Intro */}

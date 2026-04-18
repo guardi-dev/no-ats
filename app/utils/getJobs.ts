@@ -16,6 +16,11 @@ export type Job = {
 
 const jobPath = "jobs";
 
+export function getJobListCount (): number {
+    let jobFiles = readdirSync(jobPath);
+    return jobFiles.length
+}
+
 export function getJobList(): Job[] {
     let jobFiles = readdirSync(jobPath);
     let jobList: Job[] = [];

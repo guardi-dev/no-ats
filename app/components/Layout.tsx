@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { ReactNode } from "react";
 import { links } from "./links";
-
-const totalJobs = 42;
-const bannedCompaniesCount = 7;
+import { getBlacklist } from "../utils/getBlacklist";
+import { getJobListCount } from "../utils/getJobs";
 
 export function Layout(props: { children: ReactNode }) {
+
+    const bannedCompaniesCount = getBlacklist().length;
+    const totalJobs = getJobListCount();
+
     return (
         <div className="min-h-screen bg-[#f6f6ef] text-[#1a1a1a] font-mono selection:bg-[#ff6600]/20">
             <header className="bg-brand p-2 flex items-center justify-between border-b border-black/10">
