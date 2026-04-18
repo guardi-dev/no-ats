@@ -21,25 +21,30 @@ export function getJobListCount (): number {
     return jobFiles.length
 }
 
+export function getJobById (id: string): Job {
+    const md = readFileSync(join(jobPath, id + ".md")).toString();
+    const [meta, description] = md.split("===DESCRIPTION===");
+    const [position, company, salary, location, date, applyEmail, techStack] = meta.split("\n");
+    const job: Job = {
+        id,
+        position,
+        company,
+        salary,
+        location,
+        date,
+        applyEmail,
+        techStack,
+        description
+    }
+    return job;
+}
+
 export function getJobList(): Job[] {
     let jobFiles = readdirSync(jobPath);
     let jobList: Job[] = [];
     for (const f of jobFiles) {
-        const md = readFileSync(join(jobPath, f)).toString();
         const id = f.slice(0, -3);
-        const [meta, description] = md.split("===DESCRIPTION===");
-        const [position, company, salary, location, date, applyEmail, techStack] = meta.split("\n");
-        const job: Job = {
-            id,
-            position,
-            company,
-            salary,
-            location,
-            date,
-            applyEmail,
-            techStack,
-            description
-        }
+        const job = getJobById(id);
         jobList.push(job);
     }
 
