@@ -23,9 +23,9 @@ export default function NoATSPage() {
 
       {/* List */}
       <section>
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Active Openings</h2>
-          <div className="text-xs text-neutral-500 flex gap-4">
+          <div className="text-xs text-neutral-500 flex flex-col sm:flex-row sm:gap-4">
             <span>Filter: All / Rust / Go / AI</span>
             <span>Sort: Newest / Salary</span>
           </div>
@@ -54,7 +54,7 @@ export default function NoATSPage() {
                   {job.salary}
                 </div>
 
-                <div className="text-xs text-neutral-500 md:text-right whitespace-nowrap">
+                <div className="text-xs text-neutral-500 md:text-right">
                   {job.date} • {job.location} • {job.techStack}
                 </div>
               </div>

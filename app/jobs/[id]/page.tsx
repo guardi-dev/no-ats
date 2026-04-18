@@ -27,12 +27,12 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
                     <Link href={links.home} className="font-bold text-black/40 no-underline hover:underline">
                         ←
                     </Link>
-                    <span className="text-black/40 text-xs">/ jobs</span>
-                    <span className="text-black/40 text-xs">/ {id}</span>
+                    <span className="text-black/40 text-xs whitespace-nowrap">/ jobs</span>
+                    <span className="text-black/40 text-xs whitespace-nowrap truncate">/ {id}</span>
                 </div>
             </header>
 
-            <main className="max-w-4xl mx-auto p-4 md:p-8">
+            <main className="max-w-4xl mx-auto sm:p-4 md:p-8">
                 {/* Short card */}
                 <div className="bg-white border border-black/10 p-6 mb-8 shadow-[2px_2px_0px_rgba(0,0,0,0.05)]">
                     <div className="flex flex-col md:flex-row justify-between items-start gap-4">
@@ -40,7 +40,7 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
                             <h1 className="text-2xl font-bold mb-1">{jobData.position}</h1>
                             <p className="text-lg text-neutral-600">at {jobData.company}</p>
                         </div>
-                        <div className="text-right">
+                        <div className="text-right w-full sm:w-fit">
                             <div className="text-xl font-bold text-[#238636] whitespace-nowrap">{jobData.salary}</div>
                             <div className="text-sm text-neutral-500">{jobData.location}</div>
                         </div>
