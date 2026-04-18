@@ -64,7 +64,7 @@ export default function NoATSPage() {
           {featuredJobs.map((job, index) => (
             <div
               key={job.id}
-              className={`flex items-start gap-4 p-2 rounded-sm ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'} hover:bg-[#ff6600]/5 border border-transparent hover:border-[#ff6600]/10`}
+              className={`flex items-start gap-4 p-2 rounded-sm ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'} hover:bg-brand/5 border border-transparent hover:border-brand/10`}
             >
               {/* Index*/}
               <span className="text-neutral-400 text-sm w-6 text-right pt-0.5">{index + 1}.</span>
@@ -72,7 +72,7 @@ export default function NoATSPage() {
               {/* Main Info */}
               <div className="flex-grow grid grid-cols-1 md:grid-cols-[1fr,auto,auto] gap-x-6 gap-y-1 items-baseline">
                 <div>
-                  <Link href={`/jobs/${job.slug}`} className="font-medium text-[#000000] hover:underline decoration-[#ff6600]">
+                  <Link href={`/jobs/${job.slug}`} className="font-medium text-[#000000] hover:underline decoration-brand">
                     {job.role}
                   </Link>
                   <span className="text-neutral-600 text-sm ml-2">at {job.company}</span>
