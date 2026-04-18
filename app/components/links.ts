@@ -6,6 +6,7 @@ export const links = {
         sourceCode: source,
         manifesto: source + "blob/main/MANIFESTO.md",
         rules: source + "blob/main/RULES.md",
-        blacklist: source + "blob/main/BLACKLIST.md"
+        blacklist: source + "blob/main/BLACKLIST.md",
+        contributing: source + "blob/main/CONTRIBUTING.md"
     }
 }

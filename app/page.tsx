@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import { getJobListMeta } from './utils/getJobs';
+import { links } from './components/links';
 
 export default function NoATSPage() {
 
   const jobs = getJobListMeta();
+
+  console.log(jobs)
 
   return (
     <>
@@ -15,8 +18,8 @@ export default function NoATSPage() {
           Here, engineers and companies connect directly, bound by a strict code of conduct.
         </p>
         <div className="flex gap-3 mt-4 text-xs">
-          <Link href="/rules" className="bg-black text-white px-3 py-1 no-underline hover:bg-neutral-800 rounded-sm">Read the Rules</Link>
-          <a href="https://github.com/guardi/no-ats/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" className="bg-brand text-white px-3 py-1 no-underline hover:bg-brand/80 rounded-sm font-bold">Post a Job (via PR)</a>
+          <Link href={links.external.rules} className="bg-black text-white px-3 py-1 no-underline hover:bg-neutral-800 rounded-sm">Read the Rules</Link>
+          <a href={links.external.contributing} target="_blank" rel="noopener noreferrer" className="bg-brand text-white px-3 py-1 no-underline hover:bg-brand/80 rounded-sm font-bold">Post a Job (via PR)</a>
         </div>
       </section>
 
@@ -54,13 +57,15 @@ export default function NoATSPage() {
                 </div>
 
                 <div className="text-xs text-neutral-500 md:text-right whitespace-nowrap">
-                  {job.location} • {job.date}
+                  {job.date} • {job.location} • {job.techStack}
                 </div>
               </div>
 
               {/* Link */}
               <div className="text-xs pt-0.5">
-                <a href="#" className="text-brand hover:underline font-bold">Apply</a>
+                <a href={"mailto:" + job.applyEmail} className="text-brand hover:underline font-bold">
+                  Apply
+                </a>
               </div>
             </div>
           ))}
