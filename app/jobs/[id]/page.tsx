@@ -1,8 +1,17 @@
 import { links } from '@/app/components/links';
-import { getJobById } from '@/app/utils/getJobs';
+import { getJobById, getJobListMeta } from '@/app/utils/getJobs';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm'
+
+export async function generateStaticParams() {
+    const jobs = getJobListMeta();
+    return jobs.map(j => {
+        return {
+            id: j.id
+        }
+    })
+}
 
 export default async function JobDetailPage(props: { params: Promise<{ id: string }> }) {
     const { id } = await props.params;
@@ -48,7 +57,7 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
 
                 {/* Description */}
                 <article className="max-w-2xl mx-auto prose prose-neutral">
-                    <Markdown 
+                    <Markdown
                         remarkPlugins={[remarkGfm]}>
                         {jobData.description}
                     </Markdown>
