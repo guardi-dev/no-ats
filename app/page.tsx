@@ -61,7 +61,7 @@ export default function NoATSPage() {
 
               {/* Link */}
               <div className="text-xs pt-0.5">
-                <a href={"mailto:" + job.applyEmail} className="text-brand hover:underline font-bold">
+                <a href={links.email.apply(job.applyEmail, job.position)} className="text-brand hover:underline font-bold">
                   Apply
                 </a>
               </div>

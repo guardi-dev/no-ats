@@ -75,7 +75,7 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
                         No forms, no ATS tracking, just a direct email.
                     </p>
                     <a
-                        href={`mailto:${jobData.applyEmail}?subject=Application: ${jobData.position}`}
+                        href={links.email.apply(jobData.applyEmail, jobData.position)}
                         className="inline-block bg-[#ff6600] text-black font-bold px-8 py-3 rounded-sm hover:bg-[#ff6600]/90 transition-transform active:scale-95"
                     >
                         Apply to: {jobData.applyEmail}
