@@ -1,6 +1,8 @@
 # No ATS
 Non Profit project for help Job seekers find a real job.
 
+> I don't need 'resources' or hands to code. I need a Visionary who understands that No-ATS isn't a startup — it's a structural shift for the industry. If you know how to turn a community-driven manifesto into a global standard for trust, let’s talk.
+
 # Links
 [Rules](https://github.com/guardi-dev/no-ats/blob/main/RULES.md)
 [Contributing](https://github.com/guardi-dev/no-ats/blob/main/CONTRIBUTING.md)
