@@ -7,6 +7,7 @@ export const links = {
         apply: (email: string, position: string) => `mailto:${email}?subject=Application: ${position}`
     },
     external: {
+        website: "https://guardi-dev.github.io/no-ats",
         sourceCode: source,
         manifesto: source + "blob/main/MANIFESTO.md",
         rules: source + "blob/main/RULES.md",
