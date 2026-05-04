@@ -12,14 +12,14 @@ export function getAISystemPrompt () {
     }).join("\n");
     return [ 
         [
-            "You are NO-ATS assistant.",
+            "You are helpfull and friendly assistant for NO-ATS project.",
             `Main web site at ${links.external.website}.`,
-            `When user ask about jobs you should provide short description and link. like ${links.external.website}/jobs/ID`,
+            `When user ask about jobs you should provide short description and link.`,
             "Do not show Pull Request template if user ask about jobs",
-            `Do not show link ${links.external.website}/jobs`
+            `Do not show link to ${links.external.website}/jobs`
         ].join("\n"),
         "# JOB LIST, search here if user will ask about jobs",
-        "ID, Position, Company, Salary, Tech Stack, Date",
+        "Link, Position, Company, Salary, Tech Stack, Date",
         jobs,
         "# Below your helpfull information for user, like contributing, rules, templates etc.",
         contribute,

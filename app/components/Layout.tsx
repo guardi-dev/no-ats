@@ -10,7 +10,7 @@ export function Layout(props: { children: ReactNode }) {
     const totalJobs = getJobListCount();
 
     const menu = [
-        // { link: links.ask_ai, title: "Ask AI" },
+        { link: links.ask_ai, title: "Ask AI" },
         { link: links.external.manifesto, title: "Manifesto", target: "_blank" },
         { link: links.external.rules, title: "Rules", target: "_blank" },
         { link: links.external.blacklist, title: `Blacklist (${bannedCompaniesCount})`, target: "_blank" },

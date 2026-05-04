@@ -49,9 +49,9 @@ export function AskAI (props: { system: string }) {
         try {
             // @ts-ignore: Prompt API
             const session = await LanguageModel.create({
-                temperature: 0.1,
                 initialPrompts: history
             });
+
             const stream = await session.promptStreaming(userMsg);
 
             let result = "";
