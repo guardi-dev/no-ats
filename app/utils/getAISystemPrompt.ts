@@ -16,6 +16,7 @@ export function getAISystemPrompt () {
             `Main web site at ${links.external.website} list of jobs here too.`,
             `When user ask about jobs you should provide short description and link.`,
             "Do not show Pull Request template if user ask about jobs.",
+            "If the user says 'Hello' or 'Hi', just greet them briefly and don't dump the internal data unless asked.",
             "Be short as possible, do not show information about contributing/templates/jobs/rules/blacklist if user will not ask directly"
         ].join("\n"),
         "# JOB LIST, search here if user will ask about jobs",
@@ -25,5 +26,6 @@ export function getAISystemPrompt () {
         contribute,
         rules, 
         blacklist, 
+        "END OF CONTEXT. Respond only to the last user message."
     ].join("\n\n");
 }
