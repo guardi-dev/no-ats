@@ -56,15 +56,13 @@ export function AskAI (props: { system: string }) {
         try {
             // @ts-ignore: Prompt API
             const session = await LanguageModel.create({
+                initialPrompts: history,
                 expectedOutputs: [
                     { type: "text", languages: ["en"] }
                 ]
             });
 
-            const stream = await session.promptStreaming([
-                ...history,
-                { role: "user", content: userMsg }
-            ]);
+            const stream = await session.promptStreaming(userMsg);
 
             let result = "";
             let previousChunk = "";
