@@ -2,6 +2,7 @@ const source = "https://github.com/guardi-dev/no-ats/"
 
 export const links = {
     home: "/",
+    ask_ai: "/ask-ai",
     email: {
         apply: (email: string, position: string) => `mailto:${email}?subject=Application: ${position}`
     },

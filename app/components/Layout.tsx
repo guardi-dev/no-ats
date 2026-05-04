@@ -9,6 +9,14 @@ export function Layout(props: { children: ReactNode }) {
     const bannedCompaniesCount = getBlacklist().length;
     const totalJobs = getJobListCount();
 
+    const menu = [
+        // { link: links.ask_ai, title: "Ask AI" },
+        { link: links.external.manifesto, title: "Manifesto", target: "_blank" },
+        { link: links.external.rules, title: "Rules", target: "_blank" },
+        { link: links.external.blacklist, title: `Blacklist (${bannedCompaniesCount})`, target: "_blank" },
+        { link: links.external.sourceCode, title: "GitHub ↗", target: "_blank" }
+    ]
+
     return (
         <div className="min-h-screen bg-[#f6f6ef] text-[#1a1a1a] font-mono selection:bg-[#ff6600]/20">
             <header className="bg-brand p-2 flex items-center justify-between border-b border-black/10 overflow-auto">
@@ -17,10 +25,19 @@ export function Layout(props: { children: ReactNode }) {
                         No-ATS
                     </Link>
                     <nav className="flex gap-3 text-sm text-white/80 whitespace-nowrap">
-                        <Link href={links.external.manifesto} className="hover:text-white hover:underline">Manifesto</Link>
-                        <Link href={links.external.rules} className="hover:text-white hover:underline">Rules</Link>
-                        <Link href={links.external.blacklist} className="hover:text-white hover:underline">Blacklist ({bannedCompaniesCount})</Link>
-                        <a href={links.external.sourceCode} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">GitHub ↗</a>
+                        {menu.map((l,i) => {
+                            return (
+                                <Link 
+                                    key={i}
+                                    className="hover:text-white hover:underline"
+                                    rel={l.target === "_blank" ? "noopener noreferrer" : ""}
+                                    prefetch={l.target !== '_blank'}
+                                    href={l.link}
+                                    target={l.target}>
+                                    {l.title}
+                                </Link>
+                            )
+                        })}
                     </nav>
                 </div>
                 <div className="text-sm text-white/70 px-2 hidden sm:block">
