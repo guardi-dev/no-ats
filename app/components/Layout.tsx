@@ -30,7 +30,6 @@ export function Layout(props: { children: ReactNode }) {
                                 <Link 
                                     key={i}
                                     className="hover:text-white hover:underline"
-                                    prefetch={l.target !== '_blank'}
                                     href={l.link}
                                     target={l.target}>
                                     {l.title}
