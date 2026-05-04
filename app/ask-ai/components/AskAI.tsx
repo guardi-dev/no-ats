@@ -98,7 +98,7 @@ export function AskAI (props: { system: string }) {
     };
 
     return (
-        <div className="bg-white min-h-screen font-sans text-black antialiased p-4 sm:p-8">
+        <div className="bg-white min-h-screen text-black antialiased p-4 sm:p-8">
             <div className="max-w-4xl mx-auto">
                 {/* Intro Section - Matching NoATSPage */}
                 <section className="prose prose-sm prose-neutral max-w-none mb-10 pb-6 border-b border-black/5">
