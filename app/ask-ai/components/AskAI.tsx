@@ -25,7 +25,14 @@ export function AskAI (props: { system: string }) {
         (async () => {
             try {
                 // @ts-ignore: Prompt API
-                const availability = await LanguageModel.availability();
+                const availability = await LanguageModel.availability({
+                    expectedOutputs: [
+                        {
+                            type: 'text', 
+                            languages: ['en']
+                        }
+                    ],
+                });
                 setStatus(availability === "available" ? "ready" : "unsupported");
             } catch {
                 setStatus("unsupported");
@@ -49,10 +56,15 @@ export function AskAI (props: { system: string }) {
         try {
             // @ts-ignore: Prompt API
             const session = await LanguageModel.create({
-                initialPrompts: history
+                expectedOutputs: [
+                    { type: "text", languages: ["en"] }
+                ]
             });
 
-            const stream = await session.promptStreaming(userMsg);
+            const stream = await session.promptStreaming([
+                ...history,
+                { role: "user", content: userMsg }
+            ]);
 
             let result = "";
             let previousChunk = "";
