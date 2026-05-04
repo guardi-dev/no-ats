@@ -19,7 +19,7 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
     const techStack = jobData.techStack.split(", ");
 
     return (
-        <div className="min-h-screen bg-[#f6f6ef] text-[#1a1a1a] font-mono selection:bg-[#ff6600]/20">
+        <>
 
             {/* Header */}
             <header className="p-2 flex items-center border-b border-black/10">
@@ -32,9 +32,9 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
                 </div>
             </header>
 
-            <main className="max-w-4xl mx-auto sm:p-4 md:p-8">
+            <main className="max-w-4xl mx-auto py-4 sm:p-4 md:p-8">
                 {/* Short card */}
-                <div className="bg-white border border-black/10 p-6 mb-8 shadow-[2px_2px_0px_rgba(0,0,0,0.05)]">
+                <div className="bg-white mb-8">
                     <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                         <div>
                             <h1 className="text-2xl font-bold mb-1">{jobData.position}</h1>
@@ -92,6 +92,6 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
                     </Link>
                 </div>
             </main>
-        </div>
+        </>
     );
 }

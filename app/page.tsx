@@ -26,7 +26,7 @@ export default function NoATSPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Active Openings</h2>
           <div className="text-xs text-neutral-500 flex flex-col sm:flex-row sm:gap-4">
-            <span>Filter: All / Rust / Go / AI</span>
+            <span>Filter: All</span>
             <span>Sort: Newest / Salary</span>
           </div>
         </div>
@@ -70,11 +70,11 @@ export default function NoATSPage() {
         </div>
 
         {/* More */}
-        <div className="mt-8 text-center text-sm">
+        {/* <div className="mt-8 text-center text-sm">
           <button className="text-neutral-600 hover:text-black hover:underline">
             More jobs...
           </button>
-        </div>
+        </div> */}
       </section>
     </>
   );

@@ -45,7 +45,11 @@ export function Layout(props: { children: ReactNode }) {
 
             {/* Main */}
             <main className="max-w-6xl mx-auto p-4 md:p-6 lg:p-8">
-                {props.children}
+                <div className="min-h-screen bg-white text-black antialiased p-4 sm:p-8 md:p-12">
+                    <div className="max-w-[1000px] mx-auto">
+                        {props.children}
+                    </div>
+                </div>
             </main>
 
             {/* Footer */}
