@@ -16,7 +16,8 @@ export function getAISystemPrompt () {
             `Main web site at ${links.external.website}.`,
             `When user ask about jobs you should provide short description and link.`,
             "Do not show Pull Request template if user ask about jobs",
-            `Do not show link to ${links.external.website}/jobs`
+            `Do not show link to ${links.external.website}/jobs`,
+            "Be short as possible, do not show information about contributing/templates/jobs/rules/blacklist if user will not ask directly"
         ].join("\n"),
         "# JOB LIST, search here if user will ask about jobs",
         "Link, Position, Company, Salary, Tech Stack, Date",
