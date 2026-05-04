@@ -18,18 +18,18 @@ export function Layout(props: { children: ReactNode }) {
     ]
 
     return (
-        <div className="min-h-screen bg-[#f6f6ef] text-[#1a1a1a] font-mono selection:bg-[#ff6600]/20">
+        <div className="min-h-screen font-mono">
             <header className="bg-brand p-2 flex items-center justify-between border-b border-black/10 overflow-auto">
                 <div className="flex items-center gap-4">
-                    <Link href={links.home} className="font-bold text-white no-underline hover:underline text-lg whitespace-nowrap">
+                    <Link href={links.home} className="font-bold text-text-primary no-underline hover:underline text-lg whitespace-nowrap">
                         No-ATS
                     </Link>
-                    <nav className="flex gap-3 text-sm text-white/80 whitespace-nowrap">
+                    <nav className="flex gap-3 text-sm text-text-primary whitespace-nowrap">
                         {menu.map((l,i) => {
                             return (
                                 <Link 
                                     key={i}
-                                    className="hover:text-white hover:underline"
+                                    className="hover:underline"
                                     href={l.link}
                                     target={l.target}>
                                     {l.title}
@@ -38,14 +38,14 @@ export function Layout(props: { children: ReactNode }) {
                         })}
                     </nav>
                 </div>
-                <div className="text-sm text-white/70 px-2 hidden sm:block">
+                <div className="text-sm text-text-primary px-2 hidden sm:block">
                     {totalJobs} active, honest jobs
                 </div>
             </header>
 
             {/* Main */}
             <main className="max-w-6xl mx-auto p-4 md:p-6 lg:p-8">
-                <div className="min-h-screen bg-white text-black antialiased p-4 sm:p-8 md:p-12">
+                <div className="min-h-screen bg-bg-main text-text-primary antialiased p-4 sm:p-8 md:p-12">
                     <div className="max-w-[1000px] mx-auto">
                         {props.children}
                     </div>

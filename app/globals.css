@@ -2,28 +2,68 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --brand: #1F2328;
-  --background: #ffffff;
-  --foreground: #171717;
+  /* --- Foundation (Backgrounds) --- */
+  --bg-main: #E6E2D3;
+  --bg-canvas: #F0EEE4;
+  --bg-subtle: #DAD6C5;
+
+  /* --- Typography --- */
+  --text-primary: #4A4840;
+  --text-secondary: #6B685D;
+  --text-muted: #8E8B7E;
+
+  /* --- Interactive Elements (Buttons) --- */
+  /* Primary Button */
+  --btn-primary-bg: #4A4840;
+  --btn-primary-hover: #33312B;
+  --btn-primary-text: #E6E2D3;
+
+  /* Secondary Button */
+  --btn-secondary-bg: #D1CDB9;
+  --btn-secondary-hover: #C2BEAD;
+  --btn-secondary-text: #4A4840;
+
+  /* --- Surfaces & Borders --- */
+  --card-default: #F0EEE4;
+  --card-hover: #EBE8DB;
+
+  --border-soft: #C2BEAD;
+
+  /* --- Status --- */
+  --status-error: #C45B5B;
+  --status-success: #6B8E6B;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-brand: var(--brand);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-bg-main: var(--bg-main);
+  --color-bg-canvas: var(--bg-canvas);
+  --color-bg-subtle: var(--bg-subtle);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-btn-primary-bg: var(--btn-primary-bg);
+  --color-btn-primary-hover: var(--btn-primary-hover);
+  --color-btn-primary-text: var(--btn-primary-text);
+
+  --color-btn-secondary-bg: var(--btn-secondary-bg);
+  --color-btn-secondary-hover: var(--btn-secondary-hover);
+  --color-btn-secondary-text: var(--btn-secondary-text);
+
+  --color-card-default: var(--card-default);
+  --color-card-hover: var(--card-hover);
+
+  --color-border-soft: var(--border-soft);
+
+  --color-status-error: var(--status-error);
+  --color-status-success: var(--status-success);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg-canvas);
   font-family: Arial, Helvetica, sans-serif;
 }

@@ -16,8 +16,8 @@ export default function NoATSPage() {
           Here, engineers and companies connect directly, bound by a strict code of conduct.
         </p>
         <div className="flex gap-3 mt-4 text-xs">
-          <Link href={links.external.rules} className="bg-black text-white px-3 py-1 no-underline hover:bg-neutral-800 rounded-sm">Read the Rules</Link>
-          <a href={links.external.contributing} target="_blank" rel="noopener noreferrer" className="bg-brand text-white px-3 py-1 no-underline hover:bg-brand/80 rounded-sm font-bold">Post a Job (via PR)</a>
+          <Link href={links.external.rules} className="bg-btn-primary-bg hover:bg-btn-primary-hover text-btn-primary-text px-3 py-1 no-underline rounded-sm">Read the Rules</Link>
+          <a href={links.external.contributing} target="_blank" rel="noopener noreferrer" className="bg-btn-secondary-bg hover:bg-btn-secondary-hover text-btn-secondary-text px-3 py-1 no-underline rounded-sm font-bold">Post a Job (via PR)</a>
         </div>
       </section>
 
@@ -25,7 +25,7 @@ export default function NoATSPage() {
       <section>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Active Openings</h2>
-          <div className="text-xs text-neutral-500 flex flex-col sm:flex-row sm:gap-4">
+          <div className="text-xs flex flex-col sm:flex-row sm:gap-4">
             <span>Filter: All</span>
             <span>Sort: Newest / Salary</span>
           </div>
@@ -35,7 +35,7 @@ export default function NoATSPage() {
           {jobs.map((job, index) => (
             <div
               key={job.id}
-              className={`flex items-start gap-4 p-2 rounded-sm ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'} hover:bg-brand/5 border border-transparent hover:border-brand/10`}
+              className={`flex items-start gap-4 p-3 rounded-sm ${index % 2 === 0 ? 'bg-card-default' : 'bg-card-default/20'} border border-transparent hover:border-border-soft`}
             >
               {/* Index*/}
               <span className="text-neutral-400 text-sm w-6 text-right pt-0.5">{index + 1}.</span>

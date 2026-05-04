@@ -127,8 +127,8 @@ export function AskAI(props: { system: string }) {
                         return (
                             <div
                                 key={index}
-                                className={`flex items-start gap-4 p-3 rounded-sm ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'} border border-transparent`}>
-                                <span className={`text-[10px] font-bold w-12 pt-1 uppercase ${msg.role === 'user' ? 'text-brand' : 'text-neutral-400'}`}>
+                                className={`flex items-start gap-4 p-3 rounded-sm ${index % 2 === 0 ? 'bg-card-default' : 'bg-card-default/50'} border border-transparent`}>
+                                <span className={`text-[10px] font-bold w-12 pt-1 uppercase ${msg.role === 'user' ? 'text-text-primary' : 'text-text-muted'}`}>
                                     {msg.role === 'user' ? 'You' : 'AI'}
                                 </span>
                                 <div className="flex-grow prose prose-sm prose-neutral max-w-none">
@@ -151,7 +151,7 @@ export function AskAI(props: { system: string }) {
             </section>
 
             {/* Input Area */}
-            <section className="sticky bottom-8 bg-white pt-4">
+            <section className="sticky bottom-8 bg-bg-main pt-4">
                 <form onSubmit={handleAsk} className="flex gap-2">
                     <input
                         type="text"
@@ -159,12 +159,12 @@ export function AskAI(props: { system: string }) {
                         onChange={(e) => setPrompt(e.target.value)}
                         placeholder={status === 'ready' ? "Ask about jobs, tech stack or help with applying..." : "System offline"}
                         disabled={status !== 'ready' || isLoading}
-                        className="flex-grow border border-black/10 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-brand/50 placeholder:text-neutral-400"
+                        className="bg-bg-canvas flex-grow border border-black/10 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-brand/50 placeholder:text-neutral-400"
                     />
                     <button
                         type="submit"
                         disabled={!prompt.trim() || isLoading || status !== 'ready'}
-                        className="bg-black text-white px-6 py-2 text-xs font-bold hover:bg-neutral-800 rounded-sm disabled:opacity-20 transition-opacity">
+                        className="cursor-pointer bg-btn-primary-bg text-btn-primary-text px-6 py-2 text-xs font-bold rounded-sm disabled:opacity-20 transition-opacity">
                         ASK
                     </button>
                 </form>
