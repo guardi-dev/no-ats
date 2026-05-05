@@ -105,9 +105,10 @@ export function AskAI(props: { system: string }) {
                     No data is sent to external servers. Use it to compare your CV with active openings or refine your application.
                 </p>
                 {status === 'unsupported' && (
-                    <div className="mt-4 p-3 bg-red-50 border border-red-100 rounded-sm">
-                        <p className="text-xs text-red-600 font-medium">
-                            Warning: Built-In AI is not detected. Enable "Prompt API" in your Browser.
+                    <div className="mt-4 p-3 border bg-status-error/5 border-status-error/50 rounded-sm">
+                        <p className="text-xs text-status-error font-medium">
+                            Warning: Built-In AI is not detected. Enable "Prompt API" in your Browser. <br/>
+                            Enable in Chrome <a href="chrome://flags/#prompt-api-for-gemini-nano" target="_blank">chrome://flags/#prompt-api-for-gemini-nano</a>
                         </p>
                     </div>
                 )}
