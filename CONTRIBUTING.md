@@ -2,6 +2,12 @@
 
 This is a non-profit, community-driven project. We maintain high standards for vacancy listings to protect engineers from broken hiring processes.
 
+## How to Post a Proof of a Ghost Job
+
+1. Find the company in the `ghost_jobs` folder. If it is not there, please create it and place your screenshots.
+2. Please note: You must hide all private information, such as HR names, emails, and phone numbers.
+3. This registry is only for companies that waste your time.
+
 ## How to Post a Vacancy
 
 We don't have a dashboard. We use Pull Requests.
