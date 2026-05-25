@@ -5,6 +5,8 @@ export const description =
 # The Open-Source Registry of Ghost Jobs and Broken Recruitment Processes.
 Stop being free actors in their investment theater. Driven by developer Pull Requests. Verified by screenshots. 100% decentralized and immune to corporate PR cleanup.
 
+[Ghost Jobs Registry](${links.ghost_jobs_registry})
+
 ## What is this?
 The tech hiring market is fundamentally broken. You see thousands of open positions for Tech Leads, Architects, and Senior Engineers, but companies are not actually hiring.
 
