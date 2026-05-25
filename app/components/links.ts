@@ -5,6 +5,9 @@ export const links = {
     ask_ai: "/ask-ai",
     ghost_jobs: "/ghost_jobs",
     ghost_jobs_registry: "/ghost_jobs/registry",
+
+    /** Change if we will migrate out of GitHub Pages, required for links outside next.js */
+    basePath: "/no-ats",
     email: {
         apply: (email: string, position: string) => `mailto:${email}?subject=Application: ${position}`
     },
