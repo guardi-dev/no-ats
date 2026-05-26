@@ -67,7 +67,7 @@ export default function App() {
     // Form Fields
     const [company, setCompany] = useState('');
     const [role, setRole] = useState('');
-    const [status, setStatus] = useState('Applied');
+    const [status, setStatus] = useState<Job['status']>('New');
     const [salary, setSalary] = useState('');
     const [notes, setNotes] = useState('');
     const [hasProof, setHasProof] = useState(false);
@@ -77,7 +77,7 @@ export default function App() {
         setEditingJob(null);
         setCompany('');
         setRole('');
-        setStatus('Applied');
+        setStatus('New');
         setSalary('');
         setNotes('');
         setHasProof(false);
@@ -257,12 +257,11 @@ export default function App() {
                                     </label>
                                     <select
                                         value={status}
-                                        onChange={(e) => setStatus(e.target.value)}
-                                        className="w-full bg-main border border-soft rounded-lg px-3 py-2 text-primary focus:outline-none focus:ring-1 focus:ring-stone-500"
-                                    >
-                                        <option value="Applied">Wishlist / Applied</option>
-                                        <option value="Technical">In Progress / Tech Rounds</option>
-                                        <option value="Ghosted">Ghosted / No Hiring</option>
+                                        onChange={(e) => setStatus(e.target.value as Job['status'])}
+                                        className="w-full bg-main border border-soft rounded-lg px-3 py-2 text-primary focus:outline-none focus:ring-1 focus:ring-stone-500">
+                                        {(["New", "Applied", "Ghosted"] as Job['status'][]).map(i => {
+                                            return <option key={i} value={i}>{i}</option>
+                                        })}
                                     </select>
                                 </div>
                                 <div>
@@ -377,8 +376,8 @@ function JobCard({ job, onEdit }: { job: Job, onEdit: (value: Job) => void }) {
 
             {/* Description / Notes snippet */}
             {job.notes && (
-                <p className="text-xs text-secondary bg-main/50 p-2 rounded border border-soft font-serif italic">
-                    "{job.notes}"
+                <p className="text-xs text-secondary bg-main/50 px-1 rounded font-serif italic">
+                    {job.notes}
                 </p>
             )}
 
