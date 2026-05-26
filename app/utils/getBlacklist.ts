@@ -19,7 +19,7 @@ export function getGhostJobsCompanies (): GhostJobsCompany[] {
         .sort()
         .map(name => {
             const path = rootPath + "/" + name;
-            const items = readdirSync(path);
+            const items = readdirSync(path).filter(i => !i.startsWith("."));
             return {
                 name: name,
                 proofs: items.length,
