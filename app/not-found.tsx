@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { links } from "./components/links";
+import { Layout } from "./components/Layout";
 
 const menu = [
     { id: 1, title: 'Active Vacancies', desc: 'Browse all current open positions', path: links.home },
@@ -9,7 +10,7 @@ const menu = [
 
 export default function App() {
     return (
-        <>
+        <Layout>
 
             {/* Intro Section - Error Message */}
             <section className="prose prose-sm prose-neutral max-w-none mb-10 pb-6 border-b border-black/5">
@@ -76,6 +77,6 @@ export default function App() {
                     ))}
                 </div>
             </section>
-        </>
+        </Layout>
     );
 }

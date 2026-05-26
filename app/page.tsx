@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import { getJobListMeta } from './utils/getJobs';
 import { links } from './components/links';
+import { Layout } from './components/Layout';
 
 export default function NoATSPage() {
 
   const jobs = getJobListMeta();
 
   return (
-    <>
+    <Layout>
       {/* Intro */}
       <section className="prose prose-sm prose-neutral max-w-none mb-10 pb-6 border-b border-black/5">
         <h1 className="text-xl font-bold mb-2">The Engineering Job Board (Zero ATS, Zero Spying)</h1>
@@ -76,6 +77,6 @@ export default function NoATSPage() {
           </button>
         </div> */}
       </section>
-    </>
+    </Layout>
   );
 }

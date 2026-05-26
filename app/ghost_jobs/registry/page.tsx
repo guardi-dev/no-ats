@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import { links } from '@/app/components/links';
 import { getGhostJobsCompanies } from '@/app/utils/getBlacklist';
+import { Layout } from '@/app/components/Layout';
 
 export default function NoATSPage() {
 
     const companies = getGhostJobsCompanies();
 
     return (
-        <>
+        <Layout>
             {/* Intro */}
             <section className="prose prose-sm prose-neutral max-w-none mb-10 pb-6 border-b border-black/5">
                 <h1 className="text-xl font-bold mb-2">Ghost Jobs Registry</h1>
@@ -54,14 +55,7 @@ export default function NoATSPage() {
                         </div>
                     ))}
                 </div>
-
-                {/* More */}
-                {/* <div className="mt-8 text-center text-sm">
-          <button className="text-neutral-600 hover:text-black hover:underline">
-            More jobs...
-          </button>
-        </div> */}
             </section>
-        </>
+        </Layout>
     );
 }
