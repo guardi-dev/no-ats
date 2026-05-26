@@ -66,6 +66,11 @@ export default function NoATSPage() {
                 <p className="text-neutral-700 leading-relaxed">
                     Because modern hiring is broken, here is your personal job tracking board.
                 </p>
+                <div className="flex gap-3 mt-4 text-xs">
+                    <button className="cursor-pointer bg-btn-primary-bg hover:bg-btn-primary-hover text-btn-primary-text px-3 py-1 no-underline rounded-sm">
+                        + Job
+                    </button>
+                </div>
             </section>
 
             {/* List */}
