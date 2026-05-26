@@ -1,20 +1,16 @@
 import Link from "next/link";
 import { ReactNode } from "react";
 import { links } from "./links";
-import { getBlacklist } from "../utils/getBlacklist";
 import { getJobListCount } from "../utils/getJobs";
 
 export function Layout(props: { children: ReactNode }) {
 
-    const bannedCompaniesCount = getBlacklist().length;
     const totalJobs = getJobListCount();
 
     const menu = [
         { link: links.ask_ai, title: "Ask AI" },
         { link: links.ghost_jobs, title: "Ghost Jobs"},
-        { link: links.external.manifesto, title: "Manifesto", target: "_blank" },
-        { link: links.external.rules, title: "Rules", target: "_blank" },
-        { link: links.external.blacklist, title: `Blacklist (${bannedCompaniesCount})`, target: "_blank" },
+        { link: links.tracker, title: "Tracker" },
         { link: links.external.sourceCode, title: "GitHub ↗", target: "_blank" }
     ]
 

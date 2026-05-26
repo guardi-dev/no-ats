@@ -5,6 +5,7 @@ export const links = {
     ask_ai: "/ask-ai",
     ghost_jobs: "/ghost_jobs",
     ghost_jobs_registry: "/ghost_jobs/registry",
+    tracker: "/tracker",
 
     /** Change if we will migrate out of GitHub Pages, required for links outside next.js */
     basePath: "/no-ats",
