@@ -1,6 +1,6 @@
 'use client'
 
-import { SubmitEventHandler, useState } from 'react';
+import { SubmitEventHandler, useEffect, useState } from 'react';
 import './page.css';
 
 type Job = {
@@ -25,40 +25,12 @@ const kanbanItems: KanbanItem[] = [
     { title: "Ghosted", status: "Ghosted" }
 ]
 
+const LOCAL_STORAGE_KEY = "JOB_TRACKER";
+
 export default function App() {
     // State for Job Cards
-    const [jobs, setJobs] = useState<Job[]>([
-        {
-            id: '1',
-            company: 'uRun',
-            role: 'Rust Backend Engineer',
-            status: 'Ghosted',
-            salary: '$120k - $140k',
-            notes: 'Passed 3 technical rounds. They stopped replying after telling me "the team is finalising budget". Typical corporate theatre.',
-            hasProof: true,
-            updatedAt: '12h ago'
-        },
-        {
-            id: '2',
-            company: 'Polymarket Cloners',
-            role: 'Lead Solidity/HFT Developer',
-            status: 'Applied',
-            salary: '$200k - $250k',
-            notes: 'Live coding assessment went great. Building microsecond-level orderbook sync tools.',
-            hasProof: false,
-            updatedAt: '2d ago'
-        },
-        {
-            id: '3',
-            company: 'TechCorp',
-            role: 'Senior React Developer',
-            status: 'Applied',
-            salary: '$150k - $170k',
-            notes: 'Applied through standard channels. Let\'s see if this one is also a ghost vacancy.',
-            hasProof: false,
-            updatedAt: 'Just now'
-        }
-    ]);
+    const [jobs, setJobs] = useState<Job[]>([]);
+    const [clientInitialized, setClientInitialized] = useState(false);
 
     // Modal State
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -73,11 +45,11 @@ export default function App() {
     const [hasProof, setHasProof] = useState(false);
 
     // Open Modal for Create
-    const handleOpenCreate = () => {
+    const handleOpenCreate = (status: Job["status"] = "New") => {
         setEditingJob(null);
         setCompany('');
         setRole('');
-        setStatus('New');
+        setStatus(status);
         setSalary('');
         setNotes('');
         setHasProof(false);
@@ -130,6 +102,17 @@ export default function App() {
         setIsModalOpen(false);
     };
 
+    useEffect(() => {
+        const jobs = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "[]");
+        setJobs(jobs);
+        setClientInitialized(true);
+    }, [])
+
+    useEffect(() => {
+        if (!clientInitialized) return;
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(jobs));
+    }, [ jobs, clientInitialized ])
+
     const deleteJob = (id: string) => {
         setJobs(jobs.filter(j => j.id !== id));
         setIsModalOpen(false);
@@ -148,7 +131,7 @@ export default function App() {
                     </p>
                 </div>
                 <button
-                    onClick={handleOpenCreate}
+                    onClick={() => handleOpenCreate()}
                     className="btn-primary flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg shadow-sm font-medium self-start sm:self-auto cursor-pointer"
                 >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -183,7 +166,9 @@ export default function App() {
                                     <JobCard key={job.id} job={job} onEdit={handleOpenEdit} />
                                 ))}
                                 {kanbanJobs.length === 0 && (
-                                    <EmptyPlaceholder onClick={handleOpenCreate} />
+                                    <EmptyPlaceholder onClick={() => {
+                                        handleOpenCreate(k.status)
+                                    }} />
                                 )}
                             </div>
                         </div>
