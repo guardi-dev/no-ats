@@ -1,6 +1,6 @@
 'use client'
 
-import { SubmitEventHandler, useEffect, useState } from 'react';
+import { DragEventHandler, MouseEventHandler, SubmitEventHandler, useCallback, useEffect, useState } from 'react';
 import './page.css';
 
 type Job = {
@@ -31,6 +31,7 @@ export default function App() {
     // State for Job Cards
     const [jobs, setJobs] = useState<Job[]>([]);
     const [clientInitialized, setClientInitialized] = useState(false);
+    const [visibleDrop, setVisibleDrop] = useState(false);
 
     // Modal State
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -118,6 +119,40 @@ export default function App() {
         setIsModalOpen(false);
     };
 
+    const onDragStart: DragEventHandler<HTMLDivElement> = useCallback((e) => {
+        document.getElementById(e.currentTarget.id)?.setAttribute("style", "opacity:0")
+        const transfer = { id: e.currentTarget.id };
+        e.dataTransfer.setData("text/plain", JSON.stringify(transfer));
+        setVisibleDrop(true);
+    }, []);
+
+    const onDragEnd: DragEventHandler<HTMLDivElement> = useCallback((e) => {
+        document.getElementById(e.currentTarget.id)?.setAttribute("style", "opacity:1")
+        setVisibleDrop(false);
+    }, [])
+
+    const onHandleMouseDown: MouseEventHandler = useCallback((e) => {
+        const id = e.currentTarget.getAttribute("data-id");
+        if (!id) return;
+        document.getElementById(id)?.setAttribute("draggable", 'true');
+    }, [])
+
+    const onHandleMouseUp: MouseEventHandler = useCallback((e) => {
+        const id = e.currentTarget.getAttribute("data-id");
+        if (!id) return;
+        document.getElementById(id)?.setAttribute("draggable", 'false');
+    }, [])
+
+    const onDrop: DragEventHandler<HTMLDivElement> = useCallback((e) => {
+        const transfer = JSON.parse(e.dataTransfer.getData("text/plain"));
+        const status = e.currentTarget.getAttribute("data-status") as Job['status'];
+        const upd = jobs.concat();
+        const el = upd.find(i => i.id === transfer.id)
+        if (el) el.status = status;
+        setJobs(upd);
+        setVisibleDrop(false);
+    }, [ jobs ]);
+
     return (
         <div className="min-h-screen bg-canvas p-4 md:p-8 text-primary">
             {/* Header Area */}
@@ -163,12 +198,24 @@ export default function App() {
                             </div>
                             <div className="space-y-3">
                                 {kanbanJobs.map(job => (
-                                    <JobCard key={job.id} job={job} onEdit={handleOpenEdit} />
+                                    <JobCard 
+                                        key={job.id} 
+                                        job={job} 
+                                        onEdit={handleOpenEdit} 
+                                        onDragStart={onDragStart} 
+                                        onDragEnd={onDragEnd}
+                                        onHandleMouseDown={onHandleMouseDown}
+                                        onHandleMouseUp={onHandleMouseUp}
+                                    />
                                 ))}
-                                {kanbanJobs.length === 0 && (
-                                    <EmptyPlaceholder onClick={() => {
-                                        handleOpenCreate(k.status)
-                                    }} />
+                                {(kanbanJobs.length === 0 || visibleDrop) && (
+                                    <EmptyPlaceholder
+                                        status={k.status}
+                                        onDrop={onDrop}
+                                        onClick={() => {
+                                            handleOpenCreate(k.status)
+                                        }} 
+                                    />
                                 )}
                             </div>
                         </div>
@@ -330,10 +377,20 @@ export default function App() {
 }
 
 // Sub-component: Individual Kanban Card with drag-grip indicators
-function JobCard({ job, onEdit }: { job: Job, onEdit: (value: Job) => void }) {
+function JobCard({ job, onEdit, onDragStart, onDragEnd, onHandleMouseDown, onHandleMouseUp }: { 
+    job: Job, 
+    onEdit: (value: Job) => void,
+    onDragStart: DragEventHandler,
+    onDragEnd: DragEventHandler;
+    onHandleMouseUp: MouseEventHandler,
+    onHandleMouseDown: MouseEventHandler
+}) {
     return (
-        <div className="card-custom p-4 rounded-lg shadow-sm flex flex-col justify-between space-y-3 relative group">
-
+        <div 
+            id={job.id}
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
+            className="card-custom p-4 rounded-lg shadow-sm flex flex-col justify-between space-y-3 relative group">
             {/* Grab/Drag handle & Title */}
             <div className="flex items-start justify-between">
                 <div>
@@ -346,7 +403,11 @@ function JobCard({ job, onEdit }: { job: Job, onEdit: (value: Job) => void }) {
                 </div>
 
                 {/* Grab Grip Icons */}
-                <div className="flex items-center gap-1.5 text-stone-400 group-hover:text-stone-600 transition-colors cursor-move">
+                <div
+                    data-id={job.id}
+                    onMouseDown={onHandleMouseDown}
+                    onMouseUp={onHandleMouseUp}
+                    className="flex items-center gap-1.5 text-stone-400 group-hover:text-stone-600 transition-colors cursor-move">
                     {/* Drag Handle Dots SVG */}
                     <svg className="w-5 h-5 opacity-60 hover:opacity-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                         <circle cx="9" cy="5" r="1" />
@@ -390,9 +451,16 @@ function JobCard({ job, onEdit }: { job: Job, onEdit: (value: Job) => void }) {
 }
 
 // Sub-component: Empty Column Placeholder
-function EmptyPlaceholder({ onClick }: { onClick: () => void }) {
+function EmptyPlaceholder({ onClick, onDrop, status }: { 
+    onClick: () => void, 
+    onDrop: DragEventHandler,
+    status: Job['status']
+}) {
     return (
         <button
+            onDrop={onDrop}
+            data-status={status}
+            onDragOver={e => e.preventDefault()}
             onClick={onClick}
             className="w-full border-2 border-dashed border-soft/80 hover:border-soft p-4 rounded-lg text-xs text-muted font-medium flex flex-col items-center justify-center gap-2 py-6 cursor-pointer hover:bg-main/30 transition-all"
         >
