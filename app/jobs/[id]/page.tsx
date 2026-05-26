@@ -1,3 +1,4 @@
+import { Layout } from '@/app/components/Layout';
 import { links } from '@/app/components/links';
 import { getJobById, getJobListMeta } from '@/app/utils/getJobs';
 import Link from 'next/link';
@@ -19,7 +20,7 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
     const techStack = jobData.techStack.split(", ");
 
     return (
-        <>
+        <Layout>
 
             {/* Header */}
             <header className="p-2 flex items-center border-b border-border-soft">
@@ -92,6 +93,6 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
                     </Link>
                 </div>
             </main>
-        </>
+        </Layout>
     );
 }
