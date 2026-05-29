@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, SubmitEventHandler } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm'
+import { loadLLM, Session } from './ai';
 
 type Status = "checking" | "ready" | "unsupported";
 
@@ -12,33 +13,15 @@ type Message = {
 }
 
 export function AskAI(props: { system: string }) {
-    const [status, setStatus] = useState<Status>('checking'); // checking, ready, unsupported
+    const [status, setStatus] = useState<Status>('ready'); // checking, ready, unsupported
     const [prompt, setPrompt] = useState('');
     const [history, setHistory] = useState<Message[]>([
         { role: "system", content: props.system }
     ]);
     const [isLoading, setIsLoading] = useState(false);
+    const [loadingProgress, setLoadingProgress] = useState(0);
     const scrollRef = useRef<HTMLDivElement>(null);
-
-    // check ai
-    useEffect(() => {
-        (async () => {
-            try {
-                // @ts-ignore: Prompt API
-                const availability = await LanguageModel.availability({
-                    expectedOutputs: [
-                        {
-                            type: 'text',
-                            languages: ['en']
-                        }
-                    ],
-                });
-                setStatus(availability === "available" ? "ready" : "unsupported");
-            } catch {
-                setStatus("unsupported");
-            }
-        })();
-    }, []);
+    const [llm, setLLM] = useState<Session | null>(null);
 
     useEffect(() => {
         scrollRef.current?.scrollTo(0, scrollRef.current.scrollHeight);
@@ -49,47 +32,34 @@ export function AskAI(props: { system: string }) {
         if (!prompt.trim() || isLoading) return;
 
         const userMsg = prompt;
-        setHistory(prev => [...prev, { role: 'user', content: userMsg }]);
+        const upd = [...history, { role: 'user', content: userMsg }];
+        setHistory(upd as Message[]);
         setPrompt('');
         setIsLoading(true);
 
         try {
-            // @ts-ignore: Prompt API
-            const session = await LanguageModel.create({
-                initialPrompts: history,
-                expectedOutputs: [
-                    { type: "text", languages: ["en"] }
-                ]
-            });
-
-            const stream = await session.promptStreaming(userMsg);
-
-            let result = "";
-            let previousChunk = "";
-            for await (const chunk of stream) {
-                const newChunk = chunk.startsWith(previousChunk)
-                    ? chunk.slice(previousChunk.length)
-                    : chunk;
-                result += newChunk;
-                previousChunk = chunk;
-
+            let session = llm;
+            if (!session) {
+                session = await loadLLM({
+                    systemPrompt: props.system,
+                    onDownload(value) {
+                        setLoadingProgress(value);
+                    },
+                })
+                setLLM(session);
+            }
+            const stream = session.promptStreaming(userMsg);
+            const out: Message = { role: "assistant", content: "" };
+            for await (const delta of stream) {
+                out.content += delta;
                 setHistory(prev => {
-                    if (prev[prev.length - 1]?.role === 'assistant') {
-                        const upd = prev.concat();
-                        upd[prev.length - 1].content = result;
-                        return upd;
-                    }
-
-                    return [
-                        ...prev,
-                        { role: "assistant", content: result }
-                    ]
+                    const offset = prev.at(-1)?.role === 'assistant' ? 1 : 0;
+                    return [ ...prev.slice(0, prev.length - offset), out ];
                 })
             }
-
-            session.destroy();
         } catch (err) {
-            setHistory(prev => [...prev, { role: 'assistant', content: 'Inference error. Please check your browser settings (Chrome Dev/Canary required).' }]);
+            console.error(err);
+            setStatus('unsupported')
         } finally {
             setIsLoading(false);
         }
@@ -145,7 +115,11 @@ export function AskAI(props: { system: string }) {
                     })}
                     {isLoading && (
                         <div className="p-3 bg-neutral-50/50 animate-pulse text-xs text-neutral-400">
-                            AI is thinking...
+                            {
+                                loadingProgress === 100 ?
+                                'AI is thinking...' :
+                                `Loading... ${loadingProgress.toFixed(2)}%`
+                            }
                         </div>
                     )}
                 </div>
