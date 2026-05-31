@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "No-ATS",
   description: "Non-Profit, Community driven project",
+  other: {
+    "google-site-verification": "IAn_QEEtL61PXsleINrxkJ0OIb7x-JfNILbtizI7H-o"
+  }
 };
 
 export default function RootLayout({
