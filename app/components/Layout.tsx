@@ -3,16 +3,17 @@ import { ReactNode } from "react";
 import { links } from "./links";
 import { getJobListCount } from "../utils/getJobs";
 
+const menu = [
+    { link: links.ask_ai, title: "Ask AI" },
+    { link: links.ghost_jobs, title: "Ghost Jobs"},
+    { link: links.tracker, title: "Tracker" },
+    { link: links.about, title: "About" },
+    { link: links.external.sourceCode, title: "GitHub ↗", target: "_blank" }
+]
+
 export function Layout(props: { children: ReactNode, inline?: boolean }) {
 
     const totalJobs = getJobListCount();
-
-    const menu = [
-        { link: links.ask_ai, title: "Ask AI" },
-        { link: links.ghost_jobs, title: "Ghost Jobs"},
-        { link: links.tracker, title: "Tracker" },
-        { link: links.external.sourceCode, title: "GitHub ↗", target: "_blank" }
-    ]
 
     return (
         <div className="min-h-screen font-mono">
