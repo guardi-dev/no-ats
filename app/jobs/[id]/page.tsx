@@ -72,7 +72,7 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
                 <section className="mt-12 p-8 bg-card-default rounded-sm text-center">
                     <h2 className="text-xl font-bold mb-4">Ready to apply?</h2>
                     <p className="mb-6">
-                        Send your CV or GitHub profile directly to the hiring team. <br />
+                        Send your CV and GitHub profile directly to the hiring team. <br />
                         No forms, no ATS tracking, just a direct email.
                     </p>
                     <a
